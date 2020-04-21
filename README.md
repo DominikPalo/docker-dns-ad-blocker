@@ -19,7 +19,7 @@ are used in some situations to try to bypass these types of blocking systems.
 ## Usage
 
 ```
-docker run -d --restart=always -p 53:53/tcp -p 53:53/udp abcminiuser/dns-ad-blocker
+docker run -d --restart=always -p 53:53/tcp -p 53:53/udp abcminiuser/docker-dns-ad-blocker
 ```
 
 After starting the container, direct your network clients (usually via your DHCP
@@ -36,7 +36,7 @@ update script kills of the daemon.
 To enable logging of DNS queries set ```DEBUG=1```:
 
 ```
-docker run -d --restart=always -p 53:53/tcp -p 53:53/udp -e "DEBUG=1" abcminiuser/dns-ad-blocker
+docker run -d --restart=always -p 53:53/tcp -p 53:53/udp -e "DEBUG=1" abcminiuser/docker-dns-ad-blocker
 ```
 
 For verbose logging (including source IP address) set ```DEBUG=2```.
@@ -46,18 +46,18 @@ By default this image forwards DNS requests for unknown zones to Google's DNS
 servers, 8.8.8.8 and 8.8.4.4. You can set your own if required:
 
 ```
-docker run -d --restart=always -p 53:53/tcp -p 53:53/udp -e "NS1=192.168.0.1" -e "NS2=192.168.0.2" abcminiuser/dns-ad-blocker
+docker run -d --restart=always -p 53:53/tcp -p 53:53/udp -e "NS1=192.168.0.1" -e "NS2=192.168.0.2" abcminiuser/docker-dns-ad-blocker
 ```
 
 To disable automatic updates set ```AUTO_UPDATE=0```:
 
 ```
-docker run -d --restart=always -p 53:53/tcp -p 53:53/udp -e "AUTO_UPDATE=0" abcminiuser/dns-ad-blocker
+docker run -d --restart=always -p 53:53/tcp -p 53:53/udp -e "AUTO_UPDATE=0" abcminiuser/docker-dns-ad-blocker
 ```
 
 To enable optional DNSSEC domain validation, set ```DNSSEC=1```:
 ```
-docker run -d --restart=always -p 53:53/tcp -p 53:53/udp -e "DNSSEC=1" abcminiuser/dns-ad-blocker
+docker run -d --restart=always -p 53:53/tcp -p 53:53/udp -e "DNSSEC=1" abcminiuser/docker-dns-ad-blocker
 ```
 
 ## Ad Blocking
@@ -77,7 +77,7 @@ This image supports adding additional zones that may be used to serve internal D
 To do this create a volume share when creating the container:
 
 ```
-docker run -d -p 53:53/tcp -p 53:53/udp -v /srv/zones:/etc/dnsmasq.d/ oznu/dns-ad-blocker
+docker run -d -p 53:53/tcp -p 53:53/udp -v /srv/zones:/etc/dnsmasq.d/ abcminiuser/docker-dns-ad-blocker
 ```
 
 Every file in the ```/srv/zones``` will be included as an extension to the Dnsmasq config.
